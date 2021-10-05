@@ -1,6 +1,6 @@
 # AutosFrontEnd
 
-Aplicación Frontend contruida para el curso de Estructuras de Datos 2021-1.
+Aplicación Frontend construida para el curso de Estructuras de Datos 2021-1.
 
 Para instalar la aplicacion en su dispositivo debe hacer lo siguiente.
 
