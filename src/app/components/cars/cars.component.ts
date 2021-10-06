@@ -1,10 +1,12 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, Inject } from '@angular/core';
 import {CarsService} from '../../services/cars.service';
 import {Router} from '@angular/router'
 import {ElementRef, ViewChild} from '@angular/core'
 import { UploadService } from 'src/app/services/upload.service';
 import { ReturnStatement } from '@angular/compiler';
-import {ImagesURI} from "../../../config"
+import {ImagesURI} from "../../../config";
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { ImagePopupComponent } from 'src/app/image-popup/image-popup.component';
 @Component({
   selector: 'app-cars',
   templateUrl: './cars.component.html',
@@ -24,7 +26,10 @@ export class CarsComponent implements OnInit, OnChanges {
   editId?:string;
   carEdit?:any;
   flag?:boolean;
-  constructor(private router :Router,private carsService:CarsService,private uploadService:UploadService) {
+  constructor(private router :Router,
+    private carsService:CarsService,
+    private uploadService:UploadService,
+    public dialog: MatDialog) {
       this.flag=true;
    }
   ngOnInit(): void {
@@ -91,19 +96,7 @@ export class CarsComponent implements OnInit, OnChanges {
       );
       this.initCars();
   }
-  findImage(id:any){
-     this.carsService.getImage(id).subscribe(
-      (res:any)=>{
-        if(res.status==200){
-          window.open(ImagesURI+res.image,'popup','width=600,height=600');
-          return
-        }
-        alert("Este vehiculo aun no tiene foto")
 
-        
-      }
-    );
-  }
   delete(id:any){
     const car = document.getElementById(id);
     if(confirm(`Estás seguro de que quieres borrar el auto de placa ${car?.firstChild?.textContent}?`)){
@@ -270,5 +263,38 @@ regFormToEditForm(){
       btnadd.style.display="none"
     }
   }
+}
+
+findImage(id:any){
+  this.carsService.getImage(id).subscribe(
+   (res:any)=>{
+     if(res.status==200){
+       this.openDialog(ImagesURI+res.image);
+       //window.open(ImagesURI+res.image,'popup','width=600,height=600');
+       return
+     }
+     alert("Este vehiculo aun no tiene foto")
+
+     
+   }
+ );
+}
+
+openDialog(image: string) : void {
+  console.log('ABRETE SESAMO!!')
+
+  let dialogRef = this.dialog.open(ImagePopupComponent, {
+    data:{
+      imageSrc : image,
+      width: '100vw',
+      maxWidth: '100vw',
+    }
+
+  });
+  
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('Cerrando');
+  })
+
 }
 }
