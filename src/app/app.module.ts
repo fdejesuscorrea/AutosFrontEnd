@@ -9,20 +9,28 @@ import { SignupComponent } from './components/signup/signup.component';
 import {HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
 import { PublicComponent } from './components/public/public.component'
 import {TokenInterceptorService} from './services/token-interceptor.service'
-import {AuthGuard} from './auth.guard'
+import {AuthGuard} from './auth.guard';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { ImagePopupComponent } from './image-popup/image-popup.component';
 @NgModule({
   declarations: [
     AppComponent,
     CarsComponent,
     SigninComponent,
     SignupComponent,
-    PublicComponent
+    PublicComponent,
+    ImagePopupComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [
     AuthGuard,
