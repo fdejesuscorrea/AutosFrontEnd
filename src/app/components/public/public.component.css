@@ -1,0 +1,25 @@
+.card-class {
+    width: 600px;
+    height: 200px;
+    background-color: rgba(255, 255, 255, 0.4);
+    margin: 20px;
+}
+.inline-block {
+    display: inline-block;
+}
+.image {
+    max-width:80%;
+    height:auto;
+    margin-left: 30px;
+}
+.sized {
+    width: 150px
+}
+.centered {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    flex: auto;
+    justify-content: center;
+}
